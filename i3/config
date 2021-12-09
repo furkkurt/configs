@@ -42,7 +42,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec konsole
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -57,10 +57,10 @@ bindsym $mod+d exec rofi -show run
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+scedilla focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -69,10 +69,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+scedilla move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -81,7 +81,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+ctrl+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -109,15 +109,15 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "Terminals "
-set $ws2 "Firefox "
-set $ws3 "Discord "
-set $ws4 "Spotify "
-set $ws5 "Gaming "
-set $ws6 "Torrent "
-set $ws7 "Kodi "
-set $ws8 "Nemo "
-set $ws9 "Other "
-set $ws10 "10"
+set $ws2 "Browser "
+set $ws3 "Design "
+set $ws4 "Nemo "
+set $ws5 "RSS "
+set $ws6 "Video/Music "
+set $ws7 "Gaming "
+set $ws8 "IDE's "
+set $ws9 "Background "
+set $ws10 "Other "
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -129,7 +129,7 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -141,7 +141,7 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -158,10 +158,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym scedilla resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -193,27 +193,38 @@ client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-col
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
+gaps inner 12
+gaps outer 12
+
 hide_edge_borders both
 
 bar {
 	position top
 	font pango: monospace bold 9
+	colors {
+	  separator #444444
+	  background #222222
+	  statusline #B1B1B1
+	  focused_workspace #CECECE #CECECE #000000
+	  active_workspace #333333 #333333 #888888
+	  inactive_workspace #CECECE #333333 #f1f1f1
+	  urgent_workspace #eb709b #eb709b #ffffff
+	}
 	status_command ~/.config/i3/bumblebee-status/bumblebee-status \
-		-m cpu memory spotify weather datetime pasink pasource \
-		-p time.format="%H:%M" \
-		-t solarized
+		-m cpu memory spotify weather datetime battery pasink pasource \
+		-p time.format="%H:%M" weather.location="Elazığ"\
+		-t iceberg
 }
+#xrandr
 
-bindsym $mod+shift+x exec i3lock
+bindsym $mod+shift+x exec i3lock -i ~/.config/i3/palm.png
 
 # Pulse Audio controls
 bindsym $mod+F11 exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-#bindsym $mod+F10 exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-#bindsym $mod+F9 exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym $mod+F3 exec ~/xrandr-brightness-script/brightness.sh + DVI-D-0 #increase screen brightness
-bindsym $mod+F4 exec ~/xrandr-brightness-script/brightness.sh - DVI-D-0  #decrease screen brightness
+bindsym $mod+F3 exec sudo brightnessctl set 20+ #increase screen brightness
+bindsym $mod+F4 exec sudo brightnessctl set 20-  #decrease screen brightness
 
 # Media player controls
 #bindsym $mod+ exec playerctl play
@@ -226,28 +237,28 @@ bindsym $mod+shift+s exec flatpak run com.spotify.Client
 bindysm $mod+shift+d exec flatpak run com.discordapp.Discord 
 bindsym $mod+shift+ctrl+l exec lutris
 
-exec konsole
-exec konsole
-exec sudo nm-applet
 
-assign [class="Firefox"] $ws2
-assign [class="Konsole"] $ws1
-assign [class="Spotify"] $ws4
-assign [class="discord"] $ws3
-assign [class="qBittorrent"] $ws6
-assign [class="Lutris"] $ws5
-assign [class="Kodi"] $ws7
-for_window [class="Nemo"] move to workspace $ws8     
+
+#assign [class="qutebrowser"] $ws2
+assign [class="Spotify"] $ws6
+assign [class="Lutris"] $ws7
+assign [class="tiled"] $ws3
+assign [class="Steam"] $ws7
+assign [class="toribash_steam"] $ws7
+assign [class="Allegro"] $ws3
+assign [class="Apache NetBeans IDE 12.5"] $ws8
+assign [class="steam.exe"] $ws7
+assign [class="battle.net.exe"] $ws7
+for_window [class="Nemo"] move to workspace $ws4
 exec sudo date -s "-3 hours"
 exec_always feh --bg-scale --randomize Pictures/wallpapers
-exec setxkbmap -layout tr -option "caps:swapescape"
+exec setxkbmap -option "caps:swapescape"
 exec pactl --set-sink-volume 0 70%
 exec firefox
-#exec lutris
-#exec --no-startup-id "sh -c 'sleep 5; exec flatpak run com.spotify.Client'"
-#exec flatpak run com.discordapp.Discord
-#for_window [class="Mednaffe"] move to workspace $ws5
-for_window [class="Spotify"] move to workspace $ws4
+for_window [class="Spotify"] move to workspace $ws6
 for_window [class="^.*"] border pixel 0
-exec compton --config ~/.config/compton/compton.sample.conf
-
+exec_always xsetroot -cursor_name left_ptr & 
+exec_always compton --config ~/.config/compton/compton.sample.conf
+exec_always export ANDROID_HOME=/home/furkan/Android/Sdk
+exec_always export ANDROID_SDK_ROOT=/home/furkan/Android/Sdk
+exec redshift -t 4700:4000

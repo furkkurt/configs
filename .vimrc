@@ -46,16 +46,32 @@ nnoremap <leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <leader>n :set nu!<CR>
 
+"HTML
 inoremap <leader>html <!DOCTYPE html><CR><html lang="en"><CR>  <head><CR>  <meta charset="UTF-8"><CR><meta http-equiv="X-UA-Compatible" content="IE=edge"><CR><meta name="viewport" content="width=device-width,initial-scale=1.0"><CR><title></title><CR><backspace></head><CR><body><CR><CR></body><CR><backspace></html><ESC>5k5li
 inoremap <leader>div <div class=""></div><ESC>7hi
-inoremap <leader>img <img src="" alt=""></img><ESC>14hi
+inoremap <leader>img <img src="" alt=""/><ESC>9hi
+inoremap <leader>a <a href="#" class=""></a><ESC>5hi
+inoremap <leader>sec <section id=""></section><ESC>11hi
+inoremap <leader>h1 <h1 class=""></h1><ESC>6hi
+inoremap <leader>h2 <h2 class=""></h2><ESC>6hi
+inoremap <leader>h3 <h3 class=""></h3><ESC>6hi
+inoremap <leader>h4 <h4 class=""></h4><ESC>6hi
+inoremap <leader>p <p class=""></p><ESC>5hi
+inoremap <! <!--  --><ESC>3hi
+inoremap <leader>nav <nav class=""></nav><ESC>7hi
+inoremap <leader>foot <footer class=""></footer><ESC>10hi
+inoremap <leader>inp <input type="text" class="" placeholder=""/><ESC>17hi
+inoremap <leader>but <button class=""></button><ESC>10hi
+inoremap <leader>spa <span class=""></span><ESC>8hi
 
+"JS
 inoremap <leader>if if(){<CR>}<ESC>k2la
 inoremap <leader>el else{<CR>}<ESC>k4la
 inoremap <leader>elif else if(){<CR>}<ESC>k7la
 inoremap <leader>locset localStorage.setItem("", "")<ESC>6ha
 inoremap <leader>locget localStorage.getItem("")<ESC>hi
 
+"Java
 inoremap <leader>psvm public static void main(String[] args){<CR><CR>}<ESC>ka<space><space><space><space>
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 

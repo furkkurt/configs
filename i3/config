@@ -2,7 +2,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:TheOwl 14
+font pango: masturbator 14
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -28,6 +28,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 bindsym XF86MonBrightnessUp exec sudo brightnessctl set +20%
 bindsym XF86MonBrightnessDown exec sudo brightnessctl set 10%-
+bindsym $mod+F4 exec sudo brightnessctl set +20%
+bindsym $mod+F3 exec sudo brightnessctl set 10%-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -36,10 +38,10 @@ floating_modifier $mod
 bindsym $mod+Return exec alacritty
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+Shift+z kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+Tab exec --no-startup-id dmenu_run -i -fn masturbator
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -73,9 +75,9 @@ bindsym $mod+Shift+Right move right 100px
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -84,54 +86,54 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 ""
+set $ws1 ""
 set $ws2 ""
-set $ws3 ""
-set $ws4 ""
-set $ws5 ""
-set $ws6 ""
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws3 ""
+set $ws4 ""
+set $ws5 ""
+set $ws6 ""
+set $ws7 ""
+set $ws8 ""
+set $ws9 ""
+set $ws10 "?"
 
 # switch to workspace
-bindsym $mod+1 workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+1 workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
 bindsym $mod+2 workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
-bindsym $mod+3 workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
-bindsym $mod+4 workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
-bindsym $mod+5 workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
-bindsym $mod+6 workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
-bindsym $mod+7 workspace number $ws7; exec i3-msg '[class="mpv"] move to workspace 7'
-bindsym $mod+8 workspace number $ws8; exec i3-msg '[class="mpv"] move to workspace 8'
-bindsym $mod+9 workspace number $ws9; exec i3-msg '[class="mpv"] move to workspace 9'
-bindsym $mod+0 workspace number $ws10; exec i3-msg '[class="mpv"] move to workspace 10'
+bindsym $mod+3 workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+q workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+w workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+e workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+a workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+s workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+d workspace ""; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+4 workspace "?"; exec i3-msg '[class="mpv"] move to workspace "?"'
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace ""
+bindsym $mod+Shift+1 move container to workspace ""
 bindsym $mod+Shift+2 move container to workspace ""
-bindsym $mod+Shift+3 move container to workspace ""
-bindsym $mod+Shift+4 move container to workspace ""
-bindsym $mod+Shift+5 move container to workspace ""
-bindsym $mod+Shift+6 move container to workspace ""
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+3 move container to workspace ""
+bindsym $mod+Shift+q move container to workspace ""
+bindsym $mod+Shift+w move container to workspace ""
+bindsym $mod+Shift+e move container to workspace ""
+bindsym $mod+Shift+a move container to workspace ""
+bindsym $mod+Shift+s move container to workspace ""
+bindsym $mod+Shift+d move container to workspace ""
+bindsym $mod+Shift+4 move container to workspace "?"
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Ctrl+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -173,15 +175,15 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+  status_command i3status
 	mode hide
 	position top
 	output primary
 	tray_output none
-	font pango: DejaVu Sans Mono 10
-	separator_symbol"☪"
+	font pango: masturbator 14
+	separator_symbol""
     colors {
-      focused_workspace  $bg $bg $fg
+      focused_workspace  #333333 #333333 #ffff77
       active_workspace   #333333 #5f676a #ffffff
       inactive_workspace #333333 #222222 #888888
       urgent_workspace   #2f343a #900000 #ffffff
@@ -207,11 +209,11 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
 
-bindsym $mod+ctrl+shift+z exec sudo shutdown now
+bindsym $mod+ctrl+shift+x exec sudo shutdown now
 
 for_window [class="^.*"] border pixel 3
-exec wal -i ~/Pictures/wallpapers/faces-of-the-moon-3840×2160.jpg
-exec feh --bg-fill ~/Pictures/wallpapers/faces-of-the-moon-3840×2160.jpg
+#exec wal -i ~/Pictures/wallpapers/faces-of-the-moon-3840×2160.jpg
+exec feh --bg-fill ~/Pictures/wallpapers/finalizer.png
 #exec sh ~/Documents/bashScripts/wploop
 exec setxkbmap -layout tr -option "caps:swapescape"
 exec redshift
@@ -237,3 +239,4 @@ for_window [class="mpv"] floating enable, flotaing_maximum_size 640x480, move ri
 bindsym XF86AudioPlay exec playerctl --player spotify play-pause 
 bindsym XF86AudioPrev exec playerctl --player spotify previous 
 bindsym XF86AudioNext exec playerctl --player spotify next
+bindsym $mod+Ctrl+shift+s exec flameshot gui

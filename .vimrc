@@ -59,6 +59,7 @@ inoremap <leader>h4 <h4 class=""></h4><ESC>6hi
 inoremap <leader>p <p class=""></p><ESC>5hi
 inoremap <! <!--  --><ESC>3hi
 inoremap <leader>nav <nav class=""></nav><ESC>7hi
+inoremap <leader>main <main class=""></main><ESC>8hi
 inoremap <leader>foot <footer class=""></footer><ESC>10hi
 inoremap <leader>inp <input type="text" class="" placeholder=""/><ESC>17hi
 inoremap <leader>but <button class=""></button><ESC>10hi

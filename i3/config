@@ -38,7 +38,7 @@ floating_modifier $mod
 bindsym $mod+Return exec alacritty
 
 # kill focused window
-bindsym $mod+Shift+z kill
+bindsym $mod+z kill
 
 # start dmenu (a program launcher)
 bindsym $mod+Tab exec --no-startup-id dmenu_run -i -fn masturbator
@@ -148,22 +148,12 @@ mode "resize" {
         bindsym j resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
 
-        bindsym Shift+h resize shrink width 100 px or 100 ppt
-        bindsym Shift+k resize grow height 100 px or 100 ppt
-        bindsym Shift+j resize shrink height 100 px or 100 ppt
-        bindsym Shift+l resize grow width 100 px or 100 ppt
-        
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
+        bindsym Up resize grow height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
         
-        bindsym Shift+Left resize shrink width 100 px or 100 ppt
-        bindsym Shift+Up resize grow height 100 px or 100 ppt
-        bindsym Shift+Down resize shrink height 100 px or 100 ppt
-        bindsym Shift+Right resize grow width 100 px or 100 ppt
-
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -209,7 +199,7 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
 
-bindsym $mod+ctrl+shift+x exec sudo shutdown now
+bindsym $mod+ctrl+shift+z exec sudo shutdown now
 
 for_window [class="^.*"] border pixel 3
 #exec wal -i ~/Pictures/wallpapers/faces-of-the-moon-3840×2160.jpg
@@ -219,8 +209,10 @@ exec setxkbmap -layout tr -option "caps:swapescape"
 exec redshift
 exec compton
 exec autotiling
+#exec --no-startup-id /home/furkan/Documents/bashScripts/volumePopUp.sh
 exec dunst
-exec sh ~/Documents/bashScripts/volumePopUp.sh
+
+exec batify -l 30 -c 20 -f 90
 
 #Mouse bindings
 bindsym $mod+ctrl+h exec xdotool mousemove_relative -- -200 0

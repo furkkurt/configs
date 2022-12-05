@@ -9,6 +9,7 @@ let g:netrw_preview=1
 syntax on
 set history=100
 set nowrap
+set tw=0
 set noswapfile
 set softtabstop=2
 set shiftwidth=2
@@ -21,6 +22,9 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 set background=dark
 set showtabline=0
+set textwidth=999
+
+cmap w!! %!sudo tee > /dev/null
 
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -49,55 +53,59 @@ nnoremap <Leader>Q :q!<CR>
 nnoremap <leader>n :set nu!<CR>
 nnoremap <leader>x :bd<CR>
 
- "Coc
- nmap <silent> gd <Plug>(coc-definition)
- nmap <silent> gy <Plug>(coc-type-definition)
- nmap <silent> gi <Plug>(coc-implementation)
- nmap <silent> gr <Plug>(coc-references)
+"Coc
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
- " Symbol renaming.
- nmap <leader>rn <Plug>(coc-rename)
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
-  
- " Coc
- nmap <silent> gd <Plug>(coc-definition)
- nmap <silent> gy <Plug>(coc-type-definition)
- nmap <silent> gi <Plug>(coc-implementation)
- nmap <silent> gr <Plug>(coc-references)
 
- " Use K to show documentation in preview window
- nnoremap <silent> K :call <SID>show_documentation()<CR>
- function! s:show_documentation()
-   if (index(['vim','help'], &filetype) >= 0)
-     execute 'h '.expand('<cword>')
-   elseif (coc#rpc#ready())
-     call CocActionAsync('doHover')
-   else
-     execute '!' . &keywordprg . " " . expand('<cword>')
-   endif
-  endfunction
+" Coc
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-  "coc config
-  let g:coc_global_extensions = [
-    \ 'coc-snippets',
-    \ 'coc-prettier',
-    \ 'coc-json',
-    \ 'coc-flutter',
-    \ 'coc-emmet',
-    \ 'coc-html',
-    \ 'coc-css',
-    \ ]
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+ if (index(['vim','help'], &filetype) >= 0)
+   execute 'h '.expand('<cword>')
+ elseif (coc#rpc#ready())
+   call CocActionAsync('doHover')
+ else
+   execute '!' . &keywordprg . " " . expand('<cword>')
+ endif
+endfunction
+
+"coc config
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ 'coc-flutter',
+  \ 'coc-emmet',
+  \ 'coc-html',
+  \ 'coc-css',
+  \ ]
+
+"Flutter
+inoremap <leader>stf class  extends StatefulWidget{<CR>const ({ Key? key }) : super(key: key);<CR><CR>@override<CR>_State createState() => _State();<CR><backspace>}<CR><CR>class _State extends State<>{<CR>@override<CR>Widget build(BuildContext context){<CR><CR>}<CR><backspace>}<ESC>12k6li
+
 "HTML
 inoremap <leader>html <!DOCTYPE html><CR><html lang="en"><CR><head><CR><meta charset="UTF-8"><CR><meta http-equiv="X-UA-Compatible" content="IE=edge"><CR><meta name="viewport" content="width=device-width,initial-scale=1.0"><CR><title></title><CR><backspace></head><CR><body><CR><CR></body><CR><backspace></html><ESC>5k5li
 inoremap <leader>div <div class=""></div><ESC>7hi
 inoremap <leader>img <img src="" alt=""/><ESC>9hi
-inoremap <leader>a <a href="#" class=""></a><ESC>5hi
+inoremap <leader><a <a href="#" class=""></a><ESC>5hi
 inoremap <leader>sec <section id=""></section><ESC>11hi
 inoremap <leader>h1 <h1 class=""></h1><ESC>6hi
 inoremap <leader>h2 <h2 class=""></h2><ESC>6hi
 inoremap <leader>h3 <h3 class=""></h3><ESC>6hi
 inoremap <leader>h4 <h4 class=""></h4><ESC>6hi
-inoremap <leader>p <p class=""></p><ESC>5hi
+inoremap <leader><p <p class=""></p><ESC>5hi
 inoremap <! <!--  --><ESC>3hi
 inoremap <leader>nav <nav class=""></nav><ESC>7hi
 inoremap <leader>main <main class=""></main><ESC>8hi
@@ -107,7 +115,7 @@ inoremap <leader>inp <input type="text" class="" placeholder=""/><ESC>17hi
 inoremap <leader>but <button class=""></button><ESC>10hi
 inoremap <leader>spa <span class=""></span><ESC>8hi
 inoremap <leader>linkcss <link rel="stylesheet" href="" /><ESC>3hi
-inoremap <leader>linkjs <script src="" /><ESC>3hi
+inoremap <leader>linkjs <script src=""></script><ESC>10hi
 
 "JS
 inoremap <leader>if if(){<CR>}<ESC>k2la
@@ -160,6 +168,7 @@ call plug#begin()
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'manzeloth/live-server'
   Plug 'dart-lang/dart-vim-plugin'
+  Plug 'thosakwe/vim-flutter'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
 call plug#end()

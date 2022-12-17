@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec ansiweather -l istanbul | awk '{ print $5 $6 " 💧" $17 }'
+exec ansiweather -l elazığ | awk '{ print $5 $6 " 💧 " $17 }'

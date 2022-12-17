@@ -2,6 +2,17 @@ config.load_autoconfig()
 
 #config.set("colors.webpage.darkmode.enabled", True)
 
+#swapforqute
+sfq_base_dir = "~/.config/qutebrowser/userscripts/swapforqute/"
+sfq_script_path = sfq_base_dir + "main.py"
+sfq_conf_path = sfq_base_dir + "config.json"
+sfq_cmd = "--userscript {} -c {}".format(sfq_script_path, sfq_conf_path)
+
+c.aliases['sfq'] = "set-cmd-text -s :spawn {} --cmd 'open' -u ".format(sfq_cmd)
+config.bind('f', "hint links spawn {} --cmd 'open' -u ".format(sfq_cmd) + " {hint-url}")
+config.bind('F', "hint links spawn {} --cmd 'open -t' -u ".format(sfq_cmd) + " {hint-url}")
+
+
 # Bindings
 config.bind("<f2>", "inspector")
 config.bind("xb", "config-cycle statusbar.show always never")

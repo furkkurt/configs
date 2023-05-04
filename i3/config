@@ -184,7 +184,7 @@ bar {
 	position top
 	output primary
 	tray_output primary
-	font pango: source code pro 14
+	font pango: source code pro 12
 	#separator_symbol""
     colors {
       focused_workspace  #333333 #333333 #ffff77
@@ -240,6 +240,7 @@ bindsym $mod+ctrl+Shift+l exec xdotool mousemove_relative -- 10 0
 bindcode $mod+94 exec xdotool click 1
 
 for_window [class="mpv"] floating enable, flotaing_maximum_size 640x480, move right 600px, move down 600px
+#for_window [class="[.]*"] floating toggle
 
 bindsym XF86AudioPlay exec playerctl --player spotify play-pause 
 bindsym XF86AudioPrev exec playerctl --player spotify previous 

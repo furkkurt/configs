@@ -11,7 +11,6 @@ This setup focuses on simplicity, minimal dependencies, and classic Unix tools.
 
 ## Screenshots
 
-![Desktop](screenshots/2026-03-15_01-27.png)
 ![Desktop](screenshots/2026-03-15_01-29.png)
 ![Desktop](screenshots/2026-03-15_01-32.png)
 ![Desktop](screenshots/2026-03-15_01-34.png)
@@ -48,7 +47,7 @@ This setup focuses on simplicity, minimal dependencies, and classic Unix tools.
 | **GTK Theme** | Adwaita |
 | **Qt Style** | qt5ct |
 | **Icon Theme** | Tango |
-| **Fonts** | Sans / Source Code Pro |
+| **Fonts** | Tahoma |
 
 ---
 

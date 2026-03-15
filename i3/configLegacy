@@ -1,0 +1,211 @@
+set $mod Mod4
+
+font pango: Source Code Pro 14
+exec --no-startup-id dex --autostart --environment i3
+
+exec bash ~/Documents/bashScripts/wploop
+exec redshift
+#exec conky
+exec compton
+exec autotiling
+exec dunst
+exec batify -l 30 -c 20 -f 90
+exec buckle --gain=5
+exec xscreensaver
+exec --no-startup-id nm-applet
+exec sudo mount /dev/sda1 /run/media/furkan/A943-A4E7
+exec sudo NetworkManager
+
+bindsym $mod+x exec xscreensaver-command -lock
+set $refresh_i3status killall -SIGUSR1 i3status
+
+set $ws1 "{"
+set $ws2 ""
+set $ws3 ""
+set $ws4 "}"
+set $ws5 ""
+set $ws6 ""
+set $ws7 ""
+set $ws8 ""
+set $ws9 ""
+set $ws10 "?"
+
+set $c1 = #555555 #ffff77
+set $c2 = #333333 #5f676a
+set $c3 = #333333 #f0f0f0
+set $c4 = #888888 #f0f0f0
+set $c5 = #ffffff
+set $c6 = #f0f0f0
+
+bar {
+  status_command i3blocks
+	mode hide
+	position top
+	output primary
+	tray_output primary
+	font pango: Source Code Pro 13
+	#separator_symbol""
+    colors {
+      focused_workspace $c1
+      active_workspace   $c2
+      inactive_workspace $c3 
+      urgent_workspace   $c4 
+    }
+}
+gaps inner 5
+gaps outer 25
+
+# class                 border  backgr. text indicator child_border
+client.focused          $c5     $c6     $c6  $c6       $c6
+client.focused_inactive $c6     $c6     $c6  $c6       $c6
+client.unfocused        $c6     $c6     $c6  $c6       $c6
+client.urgent           $c6     $c6     $c6  $c6       $c6
+client.placeholder      $c6     $c6     $c6  $c6       $c6
+
+client.background       $bg
+
+bindsym $mod+ctrl+Shift+z exec sudo shutdown -h now
+
+for_window [class="^.*"] border pixel 1
+
+for_window [class="mpv"] floating enable, flotaing_maximum_size 640x480, move right 600px, move down 600px
+for_window [class="MonoDevelop External Console"] floating enable, flotaing_maximum_size 640x480, move right 600px, move down 600px
+#for_window [class="[.]*"] floating toggle
+
+#Key bindings
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86MonBrightnessUp exec sudo brightnessctl set +20%
+bindsym XF86MonBrightnessDown exec sudo brightnessctl set 10%-
+bindsym $mod+F4 exec sudo brightnessctl set +20%
+bindsym $mod+F3 exec sudo brightnessctl set 10%-
+
+floating_modifier $mod
+
+bindsym $mod+Return exec alacritty
+
+bindsym $mod+Shift+z kill
+
+bindsym $mod+Tab exec --no-startup-id dmenu_run -i -fn Source\ Code\ Pro
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left 
+bindsym $mod+Down focus down 
+bindsym $mod+Up focus up 
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Shift+h move left 100px
+bindsym $mod+Shift+j move down 100px
+bindsym $mod+Shift+k move up 100px
+bindsym $mod+Shift+l move right 100px
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+1 workspace $ws1; exec i3-msg '[class="mpv"] move to workspace $ws1'; exec i3-msg '[class="vokoscreen"] move to workspace $ws1'
+bindsym $mod+2 workspace $ws2; exec i3-msg '[class="mpv"] move to workspace $ws2'; exec i3-msg '[class="vokoscreen"] move to workspace $ws2'
+bindsym $mod+3 workspace $ws3; exec i3-msg '[class="mpv"] move to workspace $ws3'; exec i3-msg '[class="vokoscreen"] move to workspace $ws3'
+bindsym $mod+q workspace $ws4; exec i3-msg '[class="mpv"] move to workspace $ws4'; exec i3-msg '[class="vokoscreen"] move to workspace $ws4'
+bindsym $mod+w workspace $ws5; exec i3-msg '[class="mpv"] move to workspace $ws5'; exec i3-msg '[class="vokoscreen"] move to workspace $ws5'
+bindsym $mod+e workspace $ws6; exec i3-msg '[class="mpv"] move to workspace $ws6'; exec i3-msg '[class="vokoscreen"] move to workspace $ws6'
+bindsym $mod+a workspace $ws7; exec i3-msg '[class="mpv"] move to workspace $ws7'; exec i3-msg '[class="vokoscreen"] move to workspace $ws7'
+bindsym $mod+s workspace $ws8; exec i3-msg '[class="mpv"] move to workspace $ws8'; exec i3-msg '[class="vokoscreen"] move to workspace $ws8'
+bindsym $mod+c workspace $ws9; exec i3-msg '[class="mpv"] move to workspace $ws9'; exec i3-msg '[class="vokoscreen"] move to workspace $ws9'
+bindsym $mod+d workspace $ws10; exec i3-msg '[class="mpv"] move to workspace $ws10'; exec i3-msg '[class="vokoscreen"] move to workspace $ws10'
+
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+q move container to workspace $ws4
+bindsym $mod+Shift+w move container to workspace $ws5
+bindsym $mod+Shift+e move container to workspace $ws6
+bindsym $mod+Shift+a move container to workspace $ws7
+bindsym $mod+Shift+s move container to workspace $ws8
+bindsym $mod+Shift+c move container to workspace $ws9
+bindsym $mod+Shift+d move container to workspace $ws10
+
+#bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Ctrl+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+#Mouse controls without numpad
+bindsym $mod+ctrl+h exec xdotool mousemove_relative -- -200 0
+bindsym $mod+ctrl+j exec xdotool mousemove_relative -- 0 200
+bindsym $mod+ctrl+k exec xdotool mousemove_relative -- 0 -200
+bindsym $mod+ctrl+l exec xdotool mousemove_relative -- 200 0
+bindsym $mod+ctrl+Shift+h exec xdotool mousemove_relative -- -10 0
+bindsym $mod+ctrl+Shift+j exec xdotool mousemove_relative -- 0 10
+bindsym $mod+ctrl+Shift+k exec xdotool mousemove_relative -- 0 -10
+bindsym $mod+ctrl+Shift+l exec xdotool mousemove_relative -- 10 0
+bindcode $mod+94 exec xdotool click 1
+
+bindcode $mod+83 exec xdotool mousemove_relative -- -200 0
+bindcode $mod+88 exec xdotool mousemove_relative -- 0 200
+bindcode $mod+80 exec xdotool mousemove_relative -- 0 -200
+bindcode $mod+85 exec xdotool mousemove_relative -- 200 0
+bindcode $mod+Ctrl+83 exec xdotool mousemove_relative -- -10 0
+bindcode $mod+Ctrl+88 exec xdotool mousemove_relative -- 0 10
+bindcode $mod+Ctrl+80 exec xdotool mousemove_relative -- 0 -10
+bindcode $mod+Ctrl+85 exec xdotool mousemove_relative -- 10 0
+bindcode $mod+84 exec xdotool click 1
+
+bindsym XF86AudioPlay exec playerctl --player spotify play-pause 
+bindsym XF86AudioPrev exec playerctl --player spotify previous 
+bindsym XF86AudioNext exec playerctl --player spotify next
+bindsym F9 exec playerctl --player spotify previous 
+bindsym F10 exec playerctl --player spotify play-pause 
+bindsym F11 exec playerctl --player spotify next
+bindsym $mod+Ctrl+Shift+s exec flameshot gui
+bindsym $mod+b exec buckle --gain=5
+bindsym $mod+Ctrl+b exec killall buckle
+bindcode $mod+49 exec xdotool type $(grep -v '^#' ~/Documents/bookmarks | dmenu -i -l 50 | cut -d' ' -f1)
+
+#because my keys are broken ;(
+exec xmodmap -e "keycode 135 = ISO_Level3_Shift" ; xmodmap -e "keycode 180 = Alt_L"
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym h resize shrink width 10 px or 1 ppt
+        bindsym k resize grow height 10 px or 1 ppt
+        bindsym j resize shrink height 10 px or 1 ppt
+        bindsym l resize grow width 10 px or 1 ppt
+        bindsym Shift+h resize shrink width 100 px or 10 ppt
+        bindsym Shift+j resize shrink height 100 px or 10 ppt
+        bindsym Shift+k resize grow height 100 px or 10 ppt
+        bindsym Shift+l resize grow width 100 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 1 ppt
+        bindsym Down resize shrink height 10 px or 1 ppt
+        bindsym Up resize grow height 10 px or 1 ppt
+        bindsym Right resize grow width 10 px or 1 ppt
+        bindsym Shift+Left resize shrink width 100 px or 10 ppt
+        bindsym Shift+Down resize shrink height 100 px or 10 ppt
+        bindsym Shift+Up resize grow height 100 px or 10 ppt
+        bindsym Shift+Right resize grow width 100 px or 10 ppt
+        
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+exec setxkbmap -layout tr -option caps:swapescape
+exec pipewire
+
+#bindsym $mod+t exec --no-startup-id xfce4-panel --disable-wm-check
+#bindsym $mod+$alt+t exec killall xfce4-panel
+
+

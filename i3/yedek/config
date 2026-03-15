@@ -1,0 +1,175 @@
+set $mod Mod4
+font pango: Tahoma 14
+exec --no-startup-id dex --autostart --environment i3
+
+exec sh ~/Documents/bashScripts/wploop
+exec redshift
+exec compton
+exec autotiling
+exec dunst
+exec batify -l 30 -c 20 -f 90
+exec buckle --gain=5
+exec xscreensaver
+exec --no-startup-id nm-applet
+
+bindsym $mod+x exec xscreensaver-command -lock
+set $refresh_i3status killall -SIGUSR1 i3status
+
+set $ws1 " { "
+set $ws2 "  "
+set $ws3 "  "
+set $ws4 " } "
+set $ws5 "  "
+set $ws6 "  "
+set $ws7 "  "
+set $ws8 "  "
+set $ws9 "  "
+set $ws10 " ? "
+
+set $c1 = #6f1d1b
+set $c2 = #bb9457
+set $c3 = #432818
+set $c4 = #99582a
+set $c5 = #ffe6a7
+
+bar {
+  status_command i3blocks
+	position bottom
+	output primary
+	tray_output primary
+	font pango: Tahoma 13
+	#separator_symbol""
+    colors {
+      background #ffe6a7
+      focused_workspace $c3 $c3 $c3  
+      active_workspace  $c1 $c1 $c1 
+      inactive_workspace $c1 $c1 $c1 
+      urgent_workspace  $c1 $c1 $c1 
+    }
+}
+
+gaps inner 10
+gaps outer 10
+
+bindsym $mod+ctrl+Shift+z exec sudo shutdown now
+
+for_window [class="^.*"] border pixel 1
+
+#for_window [class="mpv"] floating enable, flotaing_maximum_size 640x480, move right 600px, move down 600px
+for_window [class="[.]*"] floating toggle
+
+#Key bindings
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86MonBrightnessUp exec sudo brightnessctl set +20%
+bindsym XF86MonBrightnessDown exec sudo brightnessctl set 10%-
+bindsym $mod+F4 exec sudo brightnessctl set +20%
+bindsym $mod+F3 exec sudo brightnessctl set 10%-
+
+floating_modifier $mod
+
+bindsym $mod+Return exec alacritty
+
+bindsym $mod+Shift+z kill
+
+bindsym $mod+Tab exec --no-startup-id dmenu_run -i -fn Tahoma
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left 
+bindsym $mod+Down focus down 
+bindsym $mod+Up focus up 
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Shift+h move left 100px
+bindsym $mod+Shift+j move down 100px
+bindsym $mod+Shift+k move up 100px
+bindsym $mod+Shift+l move right 100px
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+1 workspace " { "; exec i3-msg '[class="mpv"] move to workspace "{"'
+bindsym $mod+2 workspace "  "; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+3 workspace "  "; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+q workspace " } "; exec i3-msg '[class="mpv"] move to workspace "}"'
+bindsym $mod+w workspace "  "; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+e workspace "  "; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+a workspace "  "; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+s workspace "  "; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+d workspace "  "; exec i3-msg '[class="mpv"] move to workspace ""'
+bindsym $mod+4 workspace " ? "; exec i3-msg '[class="mpv"] move to workspace "?"'
+
+bindsym $mod+Shift+1 move container to workspace " { "
+bindsym $mod+Shift+2 move container to workspace "  "
+bindsym $mod+Shift+3 move container to workspace "  "
+bindsym $mod+Shift+q move container to workspace " } "
+bindsym $mod+Shift+w move container to workspace "  "
+bindsym $mod+Shift+e move container to workspace "  "
+bindsym $mod+Shift+a move container to workspace "  "
+bindsym $mod+Shift+s move container to workspace "  "
+bindsym $mod+Shift+d move container to workspace "  "
+bindsym $mod+Shift+4 move container to workspace " ? "
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Ctrl+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+ctrl+h exec xdotool mousemove_relative -- -200 0
+bindsym $mod+ctrl+j exec xdotool mousemove_relative -- 0 200
+bindsym $mod+ctrl+k exec xdotool mousemove_relative -- 0 -200
+bindsym $mod+ctrl+l exec xdotool mousemove_relative -- 200 0
+bindsym $mod+ctrl+Shift+h exec xdotool mousemove_relative -- -10 0
+bindsym $mod+ctrl+Shift+j exec xdotool mousemove_relative -- 0 10
+bindsym $mod+ctrl+Shift+k exec xdotool mousemove_relative -- 0 -10
+bindsym $mod+ctrl+Shift+l exec xdotool mousemove_relative -- 10 0
+bindcode $mod+94 exec xdotool click 1
+
+bindsym XF86AudioPlay exec playerctl --player spotify play-pause 
+bindsym XF86AudioPrev exec playerctl --player spotify previous 
+bindsym XF86AudioNext exec playerctl --player spotify next
+bindsym F9 exec playerctl --player spotify previous 
+bindsym F10 exec playerctl --player spotify play-pause 
+bindsym F11 exec playerctl --player spotify next
+bindsym $mod+Ctrl+Shift+s exec flameshot gui
+bindsym $mod+b exec buckle --gain=5
+bindsym $mod+Ctrl+b exec killall buckle
+bindcode $mod+49 exec xdotool type $(grep -v '^#' ~/Documents/bookmarks | dmenu -i -l 50 | cut -d' ' -f1)
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym h resize shrink width 10 px or 1 ppt
+        bindsym k resize grow height 10 px or 1 ppt
+        bindsym j resize shrink height 10 px or 1 ppt
+        bindsym l resize grow width 10 px or 1 ppt
+        bindsym Shift+h resize shrink width 100 px or 10 ppt
+        bindsym Shift+j resize shrink height 100 px or 10 ppt
+        bindsym Shift+k resize grow height 100 px or 10 ppt
+        bindsym Shift+l resize grow width 100 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 1 ppt
+        bindsym Down resize shrink height 10 px or 1 ppt
+        bindsym Up resize grow height 10 px or 1 ppt
+        bindsym Right resize grow width 10 px or 1 ppt
+        bindsym Shift+Left resize shrink width 100 px or 10 ppt
+        bindsym Shift+Down resize shrink height 100 px or 10 ppt
+        bindsym Shift+Up resize grow height 100 px or 10 ppt
+        bindsym Shift+Right resize grow width 100 px or 10 ppt
+        
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
